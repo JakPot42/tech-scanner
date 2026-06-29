@@ -1,5 +1,5 @@
 ﻿anthropic==0.52.0
 click==8.1.8
 rich==14.0.0
-requests==2.32.3
+requests>=2.33.0
 pytest>=9.0.3
