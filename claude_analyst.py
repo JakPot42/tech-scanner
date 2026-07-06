@@ -8,19 +8,8 @@ from __future__ import annotations
 import json
 import re
 
-import anthropic
-
+from claude_client import call_claude
 from config import CLAUDE_MODEL, MAX_ABSTRACT_CHARS, TECH_DOMAINS
-
-_CLIENT: anthropic.Anthropic | None = None
-
-
-def _client() -> anthropic.Anthropic:
-    global _CLIENT
-    if _CLIENT is None:
-        _CLIENT = anthropic.Anthropic()
-    return _CLIENT
-
 
 _DOMAIN_LIST = "\n".join(f"  - {d}" for d in TECH_DOMAINS)
 
@@ -79,14 +68,12 @@ def classify(item: dict) -> dict:
         f"{inst_hint}"
     )
 
-    msg = _client().messages.create(
-        model=CLAUDE_MODEL,
-        max_tokens=512,
+    raw = call_claude(
+        [{"role": "user", "content": user_msg}],
         system=_SYSTEM,
-        messages=[{"role": "user", "content": user_msg}],
-    )
-
-    raw = (msg.content[0].text or "").strip()
+        max_tokens=512,
+        model=CLAUDE_MODEL,
+    ).strip()
     # Strip markdown code fences if Claude adds them despite instructions
     raw = re.sub(r"^```(?:json)?\s*", "", raw)
     raw = re.sub(r"\s*```$", "", raw)
