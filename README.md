@@ -1,4 +1,4 @@
-# P39 — Emerging Tech Horizon Scanner
+# Emerging Tech Horizon Scanner
 
 CLI tool that monitors arXiv preprints, USPTO patents, and DARPA solicitations for emerging defense-relevant technology trends. Claude Haiku classifies each item by technology domain, dual-use potential, TRL, and novelty. Generates a Weekly Tech Watch markdown report stored in SQLite with browsable history.
 
