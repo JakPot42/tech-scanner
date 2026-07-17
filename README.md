@@ -63,7 +63,7 @@ python main.py browse --report-id 1
 main.py              Click CLI (ingest / classify / report / browse / demo)
 config.py            Constants, taxonomy, thresholds
 database.py          ScannerDB: SQLite items + reports tables
-entity_resolver.py   Institution deduplication (adapted from GhostTrace P6)
+entity_resolver.py   Institution deduplication (adapted from GhostTrace)
 sources/
   arxiv_client.py    arXiv Atom feed — no key required
   patents_client.py  USPTO PatentsView API — no key required
